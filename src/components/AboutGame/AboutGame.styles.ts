@@ -6,8 +6,8 @@ export const AboutSection = styled.section`
   justify-content: center;
   height: 100%;
   margin-top: 25px;
-  // // height: 544px;
   margin-bottom: 18px;
+  
   //  @media  ${device.tablet} {
   //   height: 100%;
   //  }
@@ -46,9 +46,10 @@ export const TextWrapper = styled.div`
   margin-bottom: 18px;
   // margin-left: 100px;
 
-//  @media ${device.laptop} {
-//     margin-left: 50px; 
-//   }
+ @media ${device.laptop} {
+  width: 100%;
+    // margin-left: 50px; 
+  }
 //   @media  ${device.tablet} {
 //   width: 100%;
 //    margin-left: 30px;
@@ -93,7 +94,7 @@ export const Image = styled.img`
   height: 100%;
   object-fit: contain;
   @media ${device.mobileM} {
-   width: 40%,
+   height: 85%;
   }
 `;
 
@@ -107,6 +108,12 @@ export const PageTitle = styled.pre`
 `;
 export const Info = styled.div`
   display: flex;
+  @media ${device.mobileS} {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+  }
 `;
 
 export const Details = styled.div`
@@ -114,9 +121,22 @@ export const Details = styled.div`
   flex-direction: column;
 `;
 
-export const InfoBlock = styled.div`
+export const InfoBlock = styled.div<{ margin?: string }>`
   display: flex;
   flex-direction: row;
+  margin-left: ${props => props.margin};
+  // @media ${device.tablet} {
+  //   margin-left: 50px;
+  // }
+  @media ${device.mobileM} {
+    margin-left: 0;
+     margin-left: 50px;
+    margin-top: 30px
+  }
+    @media ${device.mobileS} {
+    margin-left: 10px;
+    margin-top: 30px;
+  }
 `;
 export const Block = styled.div`
   display: flex;
@@ -146,6 +166,12 @@ export const InfoValue = styled.pre`
 `;
 export const ButtonWrapper = styled.div`
   margin-top: 50px;
+  @media ${device.mobileM} {
+
+        display: flex;
+        justify-content: center;
+        width: 100%;
+  }
 `;
 
 

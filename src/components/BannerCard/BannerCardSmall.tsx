@@ -16,7 +16,7 @@ export const BannerCardSmall: React.FC<BannerCardProps> = ({ className, card, on
         height="227px"
       />
       <Image
-        img={card.person}
+        img={card.logo}
         zIndex={2}
         top="-25px"
       />

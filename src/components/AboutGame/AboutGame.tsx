@@ -59,7 +59,7 @@ export const AboutGame = ({ game }: Props) => {
               </Block>
             </InfoBlock>
 
-            <InfoBlock style={{ marginLeft: '132px' }}>
+            <InfoBlock margin="132px" >
               <InfoImage src={volatility} alt="image" height="61px" />
               <Block >
                 <InfoTitle>Volatility</InfoTitle>

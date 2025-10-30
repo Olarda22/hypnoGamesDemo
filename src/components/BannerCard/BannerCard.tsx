@@ -1,14 +1,14 @@
 import React from "react";
 import { Container, Layer, Title, Description, TitleWrapper, ButtonWrapper } from "./BannerCard.styles";
 
-import { cards, type Card } from "./assets";
+import { cards, type Game } from "./assets";
 import { Button } from "../Button/Button";
 
 
 export interface BannerCardProps {
-  card: Card; 
+  card: Game; 
   className?: string;
-  onClick: (card: Card) => void;
+  onClick: (card: Game) => void;
   buttonTitle?: string;
 }
 
