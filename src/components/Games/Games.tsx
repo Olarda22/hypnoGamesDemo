@@ -50,7 +50,7 @@ export default function Games({ title, top, isSwiper = false }: Props) {
             loop={true}
             speed={600} // скорость перехода между слайдами 
             autoplay={{
-              delay: 2500, //  между переключениями
+              delay: 10000, //  между переключениями
               disableOnInteraction: false, // не останавливать при взаимодействии
             }}
             pagination={{
@@ -84,7 +84,7 @@ export default function Games({ title, top, isSwiper = false }: Props) {
               }}
               breakpoints={breakpoints}
               autoplay={{
-              delay: 2500, //  между переключениями
+              delay: 10000, //  между переключениями
               disableOnInteraction: false, // не останавливать при взаимодействии
             }}
               grabCursor={true}

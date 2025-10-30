@@ -14,7 +14,7 @@ background-color: #F0554D;
     height: 460px;
   }
      @media ${device.mobileS} {
-    height: 504px;
+    height: 514px;
   }
 `;
 
@@ -42,7 +42,7 @@ export const Image = styled.div<{
 
 export const TitleWrapper = styled.div`
   position: absolute;
-  top: 239px;
+  top: 220px;
   left:0;
   right:0;
   display: flex;
@@ -57,7 +57,7 @@ margin-top: 24px;
 
 export const ButtonWrapper = styled.div`
   position: absolute;
-  bottom: 28px;
+  bottom: 20px;
   left: 0;
   right: 0;
     button {
@@ -88,4 +88,10 @@ export const Description = styled.pre`
   line-height: 22px;
   font-weight: 200;
   text-align: center;
+   display: -webkit-box;
+  -webkit-line-clamp: 4; /* показываем только 4 строки */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal; /* важно! */
 `;

@@ -2,20 +2,30 @@ import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './Header';
 import Footer from './Footer';
+import { useRef, useCallback } from 'react';
 
 const Main = styled.main`
-  // padding-top: 160px; /* отступ для фиксированного header */
   min-height: calc(100vh - 185px);
-  // margin-bottom: 100px /* отступ для фиксированного footer */
 `;
 
 export default function Layout() {
+  const scrollToGamesRef = useRef<(() => void) | null>(null);
+
+  const handleScrollToGames = useCallback(() => {
+    if (scrollToGamesRef.current) {
+      scrollToGamesRef.current();
+    }
+  }, []);
+
+  const setScrollToGames = useCallback((scrollFn: (() => void) | null) => {
+    scrollToGamesRef.current = scrollFn;
+  }, []);
+
   return (
     <>
-      <Header />
+      <Header onGamesClick={handleScrollToGames} />
       <Main>
-        <Outlet />
-        
+        <Outlet context={{ setScrollToGames }} />
       </Main>
       <Footer />
     </>

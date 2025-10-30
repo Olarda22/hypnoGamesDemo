@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { slide as Menu } from 'react-burger-menu';
 import { NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.svg';
 import { CloseBurgerIcon, BurgerIcon } from './Icon';
-import { ContactButton, PresentationButton } from './Button/Button';
+import { ContactButton, GamesButton, PresentationButton } from './Button/Button';
 
 const HeaderWrapper = styled.header`
   // position: fixed;
@@ -12,6 +12,8 @@ const HeaderWrapper = styled.header`
   // left: 0;
   // right: 0;
   height: 147px;
+  max-width: 1440px;
+  margin: 0 auto;
   display: flex;
   align-items: end;
   justify-content: space-between;
@@ -129,8 +131,11 @@ const LogoWrapper = styled.div`
       margin-left: 0px;
   }
 `;
+type HeaderProps = {
+  onGamesClick: () => void;
+};
 
-export default function Header() {
+export default function Header({ onGamesClick }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Закрываем бургер при смене размера экрана
@@ -156,8 +161,9 @@ export default function Header() {
 
       <NavLinks>
         <NavLink to="/">About Us</NavLink>
-        <NavLink to="/games">Games</NavLink>
+        {/* <NavLink to="/games">Games</NavLink> */}
         {/* <NavLink to="/contact">Contact</NavLink> */}
+        <GamesButton onClick={onGamesClick}/>
         <ContactButton />
         <PresentationButton />
       </NavLinks>
@@ -176,12 +182,10 @@ export default function Header() {
           <NavLink to="/" onClick={() => setMenuOpen(false)}>
             About Us
           </NavLink>
-          <NavLink to="/games" onClick={() => setMenuOpen(false)}>
+          {/* <NavLink to="/games" onClick={() => setMenuOpen(false)}>
             Games
-          </NavLink>
-          {/* <NavLink to="/contact" onClick={() => setMenuOpen(false)}>
-            Contact
           </NavLink> */}
+          
           <ContactButton />
         </Menu>
       </BurgerWrapper>

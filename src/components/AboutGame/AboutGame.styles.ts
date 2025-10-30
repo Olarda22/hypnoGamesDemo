@@ -14,9 +14,9 @@ export const AboutSection = styled.section`
   //       @media ${device.mobileM} {
   //      margin-top: 45px;
   // }  
-    @media ${device.tablet} {
-    display: none;
-  }
+  //   @media ${device.tablet} {
+  //   display: none;
+  // }
 `;
 
 export const AboutWrapper = styled.div`

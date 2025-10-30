@@ -40,10 +40,10 @@ export default function MainSliderMobile() {
           slidesPerView={1}
           loop={true}
           speed={600} // скорость перехода между слайдами 
-          // autoplay={{
-          //   delay: 2500, //  между переключениями
-          //   disableOnInteraction: false, // не останавливать при взаимодействии
-          // }}
+          autoplay={{
+            delay: 10000, //  между переключениями
+            disableOnInteraction: false, // не останавливать при взаимодействии
+          }}
 
           navigation={{
             prevEl: '.swiper-button-prev-custom',

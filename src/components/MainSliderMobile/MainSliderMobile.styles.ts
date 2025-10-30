@@ -17,8 +17,7 @@ export const SwiperWrapper = styled.div`
 
   /* Стили для пагинации (точек) */
   .swiper-pagination {
-    // bottom: -20px !important;
-    bottom: -20px !important;
+    bottom: -30px !important;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,7 +39,7 @@ export const SwiperWrapper = styled.div`
   .swiper-pagination-bullet-active {
     opacity: 1;
     transform: scale(1.2);
-    background: #ff7b00;
+    background: #F0554D;
   }
 `;
 export const CarouselSection = styled.div`

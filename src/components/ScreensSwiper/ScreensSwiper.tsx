@@ -5,10 +5,12 @@ import { CarouseLeftButtonIcon, CarouseRightButtonIcon } from "../Icon";
 import type { Game } from '../BannerCard/assets';
 import { useMemo } from 'react';
 import { Image, NavButton, SwiperContainer, Container } from './ScreensSwiper.styles';
+import { useScreenSize } from '../../utils/useScreenSize';
 interface Props {
   card: Game
 }
 const ScreensSwiper = ({ card }: Props) => {
+  const { isMobile } = useScreenSize();
   const breakpoints = useMemo(() => ({
     320: {
       slidesPerView: 1,
@@ -42,17 +44,13 @@ const ScreensSwiper = ({ card }: Props) => {
             prevEl: '.swiper-button-prev-custom',
             nextEl: '.swiper-button-next-custom',
           }}
-          
-          // pagination={showPagination ? {
-          //   clickable: true,
-          //   dynamicBullets: true
-          // } : false}
+           pagination={isMobile &&{
+            clickable: true,
+          }}
+        
           breakpoints={breakpoints}
           autoplay={false}
           grabCursor={true}
-          // watchOverflow={true}
-          // centeredSlides={true}
-          // slidesPerView={4}
           className="game-carousel-swiper"
         >
           {card.gameScreens.map((screen, idx) => {

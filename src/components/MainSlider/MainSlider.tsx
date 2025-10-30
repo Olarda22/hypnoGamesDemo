@@ -22,6 +22,12 @@ export default function MainSlider() {
 
   return (
     <SwiperWrapper>
+      <NavButton className="swiper-button-prev-custom" position="left">
+                <CarouseLeftButtonIcon />
+              </NavButton>
+              <NavButton className="swiper-button-next-custom" position="right">
+                <CarouseRightButtonIcon />
+              </NavButton>
       <CarouselSection>
 
         {/* Слайдер */}
@@ -32,7 +38,7 @@ export default function MainSlider() {
           loop={true}
           speed={600} // скорость перехода между слайдами
           autoplay={{
-            delay: 2500, //пауза между переключениями
+            delay: 10000, //пауза между переключениями
             disableOnInteraction: false, // не останавливать при взаимодействии
           }}
           navigation={{
@@ -43,12 +49,7 @@ export default function MainSlider() {
         >
           {(Object.keys(cards) as Array<keyof typeof cards>).map((card) => (
             <SwiperSlide key={card} style={{ display: 'flex', justifyContent: 'center' }}>
-              <NavButton className="swiper-button-prev-custom" position="left">
-                <CarouseLeftButtonIcon />
-              </NavButton>
-              <NavButton className="swiper-button-next-custom" position="right">
-                <CarouseRightButtonIcon />
-              </NavButton>
+              
               <BannerCard card={cards[card]} buttonTitle="in detail" onClick={() => inDetailHandler(cards[card])} />
             </SwiperSlide>
           ))}

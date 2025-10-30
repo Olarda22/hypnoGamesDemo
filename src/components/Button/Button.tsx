@@ -63,6 +63,24 @@ export const ContactBtn = styled.a`
     }
 `;
 
+export const GamesBtn = styled.a`
+  // margin-right: 34px;
+  font-weight: 400;
+  font-family: 'Nunito', sans-serif;
+  text-transform: uppercase;
+  font-size: 16px;
+  padding: 3px 12px 3px 12px;
+  border-radius: 100px;
+  border: none;
+  background-color: transparent;
+  transition: color 0.2s ease;
+  color: #3A012D;
+    &:hover {
+      color: #fff;
+      background-color: #F0554D;
+    }
+`;
+
 export const PresentationButton = () => {
   const handleDownload = () => {
     const link = document.createElement('a');
@@ -86,6 +104,18 @@ export const ContactButton = () => {
       Contact
     </ContactBtn>
 
+  );
+};
+
+type GamesButtonProps = {
+  onClick: () => void;
+};
+
+export const GamesButton = ({ onClick }: GamesButtonProps) => {
+  return (
+    <GamesBtn onClick={onClick}>
+      Games
+    </GamesBtn>
   );
 };
 

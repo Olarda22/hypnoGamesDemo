@@ -13,20 +13,50 @@ export const Container = styled.div`
 margin-top: 34px;
   width: 100%;
   height: 100%;
-  @media ${device.tablet} {
-    display: none;
-  }
+   height: 220px;
+  // @media ${device.tablet} {
+  //   display: none;
+  // }
 `;
 export const SwiperContainer = styled.div`
 
   max-width:1340px;
   margin: 0 auto;
   position: relative;
+.swiper {
+    position: inherit;
+    height: 230px;
+  }
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+  }
+      /* Стили для пагинации (точек) */
+  .swiper-pagination {
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    // background-color: black;
+    // height: 10px;
+    position: absolute;
+  }
 
-  // .swiper-slide {
-  //   width: 320px;
-  //   background-color: red;
-  // }
+  .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: #D5D5D5;
+    opacity: 1;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+    transform: scale(1.2);
+    background: #F0554D;
+  }
 `;
 export const NavButton = styled.button<{ position: 'left' | 'right' }>`
   position: absolute;

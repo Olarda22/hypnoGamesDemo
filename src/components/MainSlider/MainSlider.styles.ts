@@ -4,7 +4,8 @@ import { device } from "../../styles/breakpoints";
 export const SwiperWrapper = styled.div`
 
   margin-top: -15px;
-  
+  max-width: 1440px;
+  margin: -15px auto 0 auto;
   position: relative;
   .swiper {
     @media ${device.laptop}{
@@ -38,7 +39,7 @@ export const SwiperWrapper = styled.div`
   .custom-bullet-active {
     opacity: 1;
     transform: scale(1.2);
-    background: #ff7b00; /* чуть ярче при активном */
+    background: #F0554D; /* чуть ярче при активном */
   }
   }
 `;
@@ -58,7 +59,7 @@ export const NavButton = styled.button<{ position: 'left' | 'right' }>`
   top: 50%;
   height: 100%;
   z-index: 1000;
-   ${({ position }) => (position === 'left' ? 'left: 0px;' : 'right: 0px;')}
+   ${({ position }) => (position === 'left' ? 'left: 5px;' : 'right: -5px;')}
   transform: translateY(-50%);
   background: none;
   border: none;

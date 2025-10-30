@@ -10,7 +10,7 @@ export const AboutSection = styled.section`
     height: 100%;
    }
         @media ${device.mobileM} {
-       margin-top: 45px;
+       margin-top: 55px;
   }  
    
 `;
@@ -48,9 +48,10 @@ export const TextWrapper = styled.div`
     margin-left: 50px; 
   }
   @media  ${device.tablet} {
-  width: 100%;
-   margin-left: 30px;
-   height: 100%;
+    width: 100%;
+    margin-left: 30px;
+    margin-right: 15px;
+    height: 100%;
     align-items: center;
   }   
 `;
