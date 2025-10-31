@@ -36,10 +36,9 @@ export default function GamePage() {
 
   };
   const moreGamesHandler = () => {
-    console.log('moreGamesHandler');
     navigate(`/games`)
-
   };
+
   if (!currentGame) return null
   return (
     <>

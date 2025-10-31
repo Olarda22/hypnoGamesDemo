@@ -18,7 +18,6 @@ export const AboutGame = ({ game }: Props) => {
     );
   }
   const renderGameInfo = () => {
-    console.log(game.gameInfo, 'gameInfo')
     const info: gameInfoType[] = game.gameInfo;
 
     return (

@@ -17,9 +17,9 @@ export default function Layout() {
     }
   }, []);
 
-  const setScrollToGames = useCallback((scrollFn: (() => void) | null) => {
+  const setScrollToGames = (scrollFn: (() => void) | null) => {
     scrollToGamesRef.current = scrollFn;
-  }, []);
+  };
 
   return (
     <>

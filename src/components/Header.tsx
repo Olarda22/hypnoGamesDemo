@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { slide as Menu } from 'react-burger-menu';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import logo from '../assets/logo.svg';
 import { CloseBurgerIcon, BurgerIcon } from './Icon';
@@ -137,58 +137,77 @@ type HeaderProps = {
 
 export default function Header({ onGamesClick }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  // Закрываем бургер при смене размера экрана
+  const params = useParams<any>();
+    const navigate = useNavigate();
+  const [isGamePage, setIsGamePage] = useState(false);
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 1023 && menuOpen) {
-        setMenuOpen(false);
+    if (!params) return
+    if (params.name) setIsGamePage(true)
+      return () => {
+        setIsGamePage(false)
       }
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [menuOpen]);
+  }, [params])
 
-  return (
-    <HeaderWrapper>
-      <NavLink to="/">
-        <LogoWrapper>
-          <Logo src={logo} alt="Hypno Games" />
-          <TitleWrapper>Making gambling easier</TitleWrapper>
-        </LogoWrapper>
-      </NavLink>
+  const clickHandler = () => {
+    if (isGamePage) {
+      navigate(`/games`)
+    } else {
+      onGamesClick()
+    }
+  
+};
+
+// Закрываем бургер при смене размера экрана
+useEffect(() => {
+  const handleResize = () => {
+    if (window.innerWidth > 1023 && menuOpen) {
+      setMenuOpen(false);
+    }
+  };
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, [menuOpen]);
+
+return (
+  <HeaderWrapper>
+    <NavLink to="/">
+      <LogoWrapper>
+        <Logo src={logo} alt="Hypno Games" />
+        <TitleWrapper>Making gambling easier</TitleWrapper>
+      </LogoWrapper>
+    </NavLink>
 
 
-      <NavLinks>
-        <NavLink to="/">About Us</NavLink>
-        {/* <NavLink to="/games">Games</NavLink> */}
-        {/* <NavLink to="/contact">Contact</NavLink> */}
-        <GamesButton onClick={onGamesClick}/>
-        <ContactButton />
-        <PresentationButton />
-      </NavLinks>
+    <NavLinks>
+      <NavLink to="/">About Us</NavLink>
+      {/* <NavLink to="/games">Games</NavLink> */}
+      {/* <NavLink to="/contact">Contact</NavLink> */}
+      <GamesButton onClick={clickHandler} />
+      <ContactButton />
+      <PresentationButton />
+    </NavLinks>
 
-      <BurgerWrapper>
-        <Menu
-          right
-          noOverlay
-          isOpen={menuOpen}
-          onStateChange={(state) => setMenuOpen(state.isOpen)}
-          customBurgerIcon={<BurgerIcon />}
-          customCrossIcon={<CloseBurgerIcon />}
+    <BurgerWrapper>
+      <Menu
+        right
+        noOverlay
+        isOpen={menuOpen}
+        onStateChange={(state) => setMenuOpen(state.isOpen)}
+        customBurgerIcon={<BurgerIcon />}
+        customCrossIcon={<CloseBurgerIcon />}
 
-          width={'100%'}
-        >
-          <NavLink to="/" onClick={() => setMenuOpen(false)}>
-            About Us
-          </NavLink>
-          {/* <NavLink to="/games" onClick={() => setMenuOpen(false)}>
+        width={'100%'}
+      >
+        <NavLink to="/" onClick={() => setMenuOpen(false)}>
+          About Us
+        </NavLink>
+        {/* <NavLink to="/games" onClick={() => setMenuOpen(false)}>
             Games
           </NavLink> */}
-          
-          <ContactButton />
-        </Menu>
-      </BurgerWrapper>
-    </HeaderWrapper>
-  );
+
+        <ContactButton />
+      </Menu>
+    </BurgerWrapper>
+  </HeaderWrapper>
+);
 }
