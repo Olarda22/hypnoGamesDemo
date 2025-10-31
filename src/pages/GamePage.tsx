@@ -47,7 +47,7 @@ export default function GamePage() {
       </BannerWrapper>
       <ScreensSwiper card={currentGame} />
       <AboutGame game={currentGame} />
-      <Games title="Other games" top={isMobile ? "0px" : "70px"} isSwiper={true} />
+      <Games title="Other games" top={isMobile ? "0px" : "70px"}  isSwiper={false}/>
       <ButtonWrapper>
         <Button
           onClick={() => moreGamesHandler()}
