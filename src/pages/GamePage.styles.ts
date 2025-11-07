@@ -6,6 +6,27 @@ export const BannerWrapper = styled.div`
   justify-content: center;
   margin-top: -15px;
 `;
+export const ViewerWrapper = styled.div`
+.react-simple-image-viewer__modal {
+  z-index: 10;
+}
+.react-simple-image-viewer__previous {
+  z-index: 3;
+  opacity: 1;
+  margin-left: 100px;
+}
+
+.react-simple-image-viewer__next {
+  z-index: 3;
+  opacity: 1;
+  margin-right: 100px;
+}
+.react-simple-image-viewer__close {
+  z-index: 3;
+  opacity: 1;
+}
+`;
+
 export const Banner = styled.div`
   padding-left: 20px;
   padding-right: 20px;

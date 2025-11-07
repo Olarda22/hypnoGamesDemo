@@ -78,10 +78,6 @@ position: absolute;
   width: 40px;
   height: 40px;
 
-  &:active {
-    transform: rotate(90deg) scale(0.95);
-  }
-
   @media (max-width: 767px) {
     font-size: 28px;
     width: 36px;

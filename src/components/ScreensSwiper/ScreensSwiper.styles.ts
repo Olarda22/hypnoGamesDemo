@@ -4,7 +4,8 @@ import { device } from "../../styles/breakpoints";
 export const Image = styled.img`
  width: 320px; 
   height: 200px;
-  object-fit: contain;
+  object-fit: cover;
+  border-radius: 20px;
   // @media ${device.mobileM} {
   //  width: 40%,
   // }
@@ -62,7 +63,7 @@ export const NavButton = styled.button<{ position: 'left' | 'right' }>`
   position: absolute;
    top: 50%;
   height: 100%;
-  z-index: 1000;
+  z-index: 2;
    ${({ position }) => (position === 'left' ? 'left: -42px;' : 'right: -42px;')}
   transform: translateY(-50%);
   background: none;

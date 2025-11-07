@@ -1,32 +1,23 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useScreenSize } from '../utils/useScreenSize';
-import MainSliderMobile from '../components/MainSliderMobile/MainSliderMobile';
-import MainSlider from '../components/MainSlider/MainSlider';
 import { BannerCard, cards } from '../components/BannerCard';
 import { BannerCardSmall } from '../components/BannerCard/BannerCardSmall';
-import { Banner, BannerWrapper, ButtonWrapper } from './GamePage.styles';
+import { Banner, BannerWrapper, ButtonWrapper, ViewerWrapper } from './GamePage.styles';
 import type { Game } from '../components/BannerCard/assets';
 import ScreensSwiper from '../components/ScreensSwiper/ScreensSwiper';
 import { useCallback, useEffect, useState } from 'react';
 import { AboutGame } from '../components/AboutGame/AboutGame';
 import Games from '../components/Games/Games';
 import { Button } from '../components/Button/Button';
-
 import { GameModal } from '../components/GameModal';
-
 import ImageViewer from 'react-simple-image-viewer';
-import { CarouseLeftButtonIcon } from '../components/Icon';
-
-
+import { CarouseLeftButtonIcon, CarouseRightButtonIcon, CloseIcon } from '../components/Icon';
 
 export default function GamePage() {
   const { isMobile } = useScreenSize();
   const navigate = useNavigate();
   const [currentGame, setCurrentGame] = useState<Game | null>(null)
-
   const [isModalOpen, setIsModalOpen] = useState(false)
-
-
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const params = useParams<{ name: keyof typeof cards }>();
@@ -37,10 +28,7 @@ export default function GamePage() {
     const card = name ? cards[name] : null;
     setCurrentGame(card)
   }, [params])
-  // const inDetailHandler = (card: Card) => {
-  //   console.log('inDetailHandler');
-  //     navigate(`/games/${card.name}`)
-  // };
+
   const playNowHandler = (game: Game) => {
     if (isMobile) {
       navigate('/game-play', {
@@ -62,16 +50,14 @@ export default function GamePage() {
   };
 
   const onCardClickHandler = (idx: number) => {
-    console.log('oncardClickHandler', idx, 'idx');
     openImageViewer(idx)
-    //navigate(`/games/${card.name}`)
   };
-   const openImageViewer = useCallback((index: number) => {
+  const openImageViewer = useCallback((index: number) => {
     setCurrentImage(index);
     setIsViewerOpen(true);
   }, []);
 
-   const closeImageViewer = () => {
+  const closeImageViewer = () => {
     setCurrentImage(0);
     setIsViewerOpen(false);
   };
@@ -80,20 +66,26 @@ export default function GamePage() {
   return (
     <>
       <BannerWrapper>
-        {isMobile ? <Banner><BannerCardSmall card={currentGame} buttonTitle='Play now' onClick={playNowHandler} /></Banner> : <BannerCard card={currentGame} buttonTitle='Play now' onClick={playNowHandler} />}
+        {isMobile ? <Banner>
+          <BannerCardSmall card={currentGame} buttonTitle='Play now' onClick={playNowHandler} /></Banner>
+          : <BannerCard card={currentGame} buttonTitle='Play now' onClick={playNowHandler} />}
       </BannerWrapper>
       <ScreensSwiper card={currentGame} onCardClick={onCardClickHandler} />
-       {isViewerOpen && (
-        <ImageViewer
-          src={ currentGame.gameScreens}
-          currentIndex={ currentImage }
-          disableScroll={ false }
-          closeOnClickOutside={ true }
-          onClose={ closeImageViewer }
-          backgroundStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.9)' }}
-          leftArrowComponent={<CarouseLeftButtonIcon />}
-        />
-      )}
+      <ViewerWrapper>
+        {isViewerOpen && (
+          <ImageViewer
+            src={currentGame.gameScreens}
+            currentIndex={currentImage}
+            disableScroll={true}
+            closeOnClickOutside={true}
+            onClose={closeImageViewer}
+            backgroundStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}
+            leftArrowComponent={<CarouseLeftButtonIcon />}
+            rightArrowComponent={<CarouseRightButtonIcon />}
+            closeComponent={<CloseIcon />}
+          />
+        )}
+      </ViewerWrapper>
       <AboutGame game={currentGame} />
       <Games title="Other games" top={isMobile ? "0px" : "70px"} isSwiper={false} />
       <ButtonWrapper>
