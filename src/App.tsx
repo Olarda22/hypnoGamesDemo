@@ -3,6 +3,7 @@ import Layout from './components/Layout';
 import AboutPage from './pages/AboutPage';
 import GamesPage from './pages/GamesPage';
 import GamePage from './pages/GamePage';
+import GamePlayPage from './pages/GamePlayPage';
 import { ScrollToTop } from './utils/ScrollToTop';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/games" element={<GamesPage />} />
           <Route path="games/:name" element={<GamePage />} />
         </Route>
+        <Route path="/game-play" element={<GamePlayPage />} />
       </Routes>
     </>
   );

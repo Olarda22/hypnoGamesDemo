@@ -11,12 +11,14 @@ import { useEffect, useState } from 'react';
 import { AboutGame } from '../components/AboutGame/AboutGame';
 import Games from '../components/Games/Games';
 import { Button } from '../components/Button/Button';
+import { GameModal } from '../components/GameModal';
 
 
 export default function GamePage() {
   const { isMobile } = useScreenSize();
   const navigate = useNavigate();
   const [currentGame, setCurrentGame] = useState<Game | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const params = useParams<{ name: keyof typeof cards }>();
 
@@ -31,9 +33,20 @@ export default function GamePage() {
   //     navigate(`/games/${card.name}`)
   // };
   const playNowHandler = (game: Game) => {
-    console.log('playNowHandler');
-    //navigate(`/games/${card.name}`)
+    if (isMobile) {
+      navigate('/game-play', {
+        state: {
+          gameUrl: game.gameUrl,
+          gameName: game.gameName
+        }
+      });
+    } else {
+      setIsModalOpen(true);
+    }
+  };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
   const moreGamesHandler = () => {
     navigate(`/games`)
@@ -57,6 +70,12 @@ export default function GamePage() {
         </Button>
       </ButtonWrapper>
 
+      <GameModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        gameUrl={currentGame?.gameUrl || ''}
+        gameName={currentGame?.gameName || ''}
+      />
     </>
   );
 }
