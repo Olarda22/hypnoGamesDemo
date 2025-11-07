@@ -12,6 +12,7 @@ export const card = {
     background,
     previewBg: background,
     gameScreens: [screen, screen, screen, screen, screen, screen, screen],
+    gameScreensFull: [screen, screen, screen, screen, screen, screen, screen],
     person,
     character,
     gameInfo: [

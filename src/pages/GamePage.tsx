@@ -74,7 +74,7 @@ export default function GamePage() {
       <ViewerWrapper>
         {isViewerOpen && (
           <ImageViewer
-            src={currentGame.gameScreens}
+            src={currentGame.gameScreensFull}
             currentIndex={currentImage}
             disableScroll={true}
             closeOnClickOutside={true}

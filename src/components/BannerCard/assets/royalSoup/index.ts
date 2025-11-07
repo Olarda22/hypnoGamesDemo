@@ -35,6 +35,7 @@ export const card = {
         },
     ],
     gameScreens: [screen_1, screen_2, screen_3, screen_4, screen_5, screen_6],
+    gameScreensFull: [screen_1, screen_2, screen_3, screen_4, screen_5, screen_6],
     person,
     personWidth: "540px",
     personHeight: "576px",

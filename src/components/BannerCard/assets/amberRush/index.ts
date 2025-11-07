@@ -9,6 +9,7 @@ export const card = {
     gameName: 'Amber Rush',
     gameUrl: 'https://fake-casino.hypno-game.com/play-demo?game=url',
     gameScreens: [screen, screen, screen,screen, screen, screen,screen, screen, screen],
+    gameScreensFull: [screen, screen, screen,screen, screen, screen,screen, screen, screen],
     background,
     previewBg: background,
     character,

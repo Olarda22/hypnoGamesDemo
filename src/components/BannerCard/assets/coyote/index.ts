@@ -10,6 +10,7 @@ export const card = {
     gameName: 'Coyote',
     gameUrl: 'https://fake-casino.hypno-game.com/play-demo?game=coyote',
     gameScreens: [screen, screen, screen, screen, screen, screen, screen, screen, screen],
+    gameScreensFull: [screen, screen, screen, screen, screen, screen, screen, screen, screen],
     background,
     previewBg: background,
     person,

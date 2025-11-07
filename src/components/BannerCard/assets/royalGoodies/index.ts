@@ -30,6 +30,7 @@ export const card = {
         },
     ],
     gameScreens: [screen, screen, screen, screen, screen, screen],
+    gameScreensFull: [screen, screen, screen, screen, screen, screen],
     person,
     personWidth: "495px",
     personHeight: "570px",
