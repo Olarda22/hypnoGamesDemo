@@ -8,6 +8,7 @@ import character from "./character.svg";
 export const card = {
     name: 'coyote',
     gameName: 'Coyote',
+    gameUrl: 'https://fake-casino.hypno-game.com/play-demo?game=coyote',
     gameScreens: [screen, screen, screen, screen, screen, screen, screen, screen, screen],
     background,
     previewBg: background,

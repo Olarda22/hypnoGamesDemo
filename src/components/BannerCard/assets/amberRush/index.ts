@@ -7,6 +7,7 @@ import character from "./character.svg";
 export const card = {
     name: 'amberRush',
     gameName: 'Amber Rush',
+    gameUrl: 'https://fake-casino.hypno-game.com/play-demo?game=url',
     gameScreens: [screen, screen, screen,screen, screen, screen,screen, screen, screen],
     background,
     previewBg: background,

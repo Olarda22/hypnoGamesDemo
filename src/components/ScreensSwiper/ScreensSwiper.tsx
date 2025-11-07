@@ -7,9 +7,10 @@ import { useMemo } from 'react';
 import { Image, NavButton, SwiperContainer, Container } from './ScreensSwiper.styles';
 import { useScreenSize } from '../../utils/useScreenSize';
 interface Props {
-  card: Game
+  card: Game,
+  onCardClick: (idx: number) => void
 }
-const ScreensSwiper = ({ card }: Props) => {
+const ScreensSwiper = ({ card, onCardClick }: Props) => {
   const { isMobile } = useScreenSize();
   const breakpoints = useMemo(() => ({
     320: {
@@ -40,6 +41,7 @@ const ScreensSwiper = ({ card }: Props) => {
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
           spaceBetween={10}
+          
           navigation={{
             prevEl: '.swiper-button-prev-custom',
             nextEl: '.swiper-button-next-custom',
@@ -47,14 +49,14 @@ const ScreensSwiper = ({ card }: Props) => {
            pagination={isMobile &&{
             clickable: true,
           }}
-        
+          
           breakpoints={breakpoints}
           autoplay={false}
           grabCursor={true}
           className="game-carousel-swiper"
         >
           {card.gameScreens.map((screen, idx) => {
-            return <SwiperSlide key={idx} style={{ width: '320px' }}>
+            return <SwiperSlide key={idx} style={{ width: '320px' }} onClick={() => onCardClick(idx)}>
                 <Image src={screen} alt="image" />
             </SwiperSlide>
           })}

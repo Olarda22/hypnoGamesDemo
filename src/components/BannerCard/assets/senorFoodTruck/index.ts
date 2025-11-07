@@ -8,6 +8,7 @@ import character from "./character.svg";
 export const card = {
     name: "senorFoodTruck",
     gameName: 'Senor FoodTruck',
+    gameUrl: 'https://fake-casino.hypno-game.com/play-demo?game=food-truck',
     background,
     previewBg: background,
     character,

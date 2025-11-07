@@ -2,12 +2,18 @@
 import background from "./banner.svg";
 import person from "./person.svg";
 import logo from "./logo.svg";
-import screen from "./screens/screen.png";
+import screen_1 from "./screens/screen_1.png";
+import screen_2 from "./screens/screen_2.svg"
+import screen_3 from "./screens/screen_3.svg";
+import screen_4 from "./screens/screen_4.svg";
+import screen_5 from "./screens/screen_5.svg";
+import screen_6 from "./screens/screen_6.svg";
 import character from "./character.svg";
 
 export const card = {
     name: "royalSoup",
     gameName: 'Royal soup',
+    gameUrl: 'https://fake-casino.hypno-game.com/play-demo?game=royal-soup',
     background,
     previewBg: background,
     character,
@@ -28,7 +34,7 @@ export const card = {
             description: ['Sequential filling of the playing field', 'Anticipation effect']
         },
     ],
-    gameScreens: [screen, screen, screen, screen, screen, screen],
+    gameScreens: [screen_1, screen_2, screen_3, screen_4, screen_5, screen_6],
     person,
     personWidth: "540px",
     personHeight: "576px",

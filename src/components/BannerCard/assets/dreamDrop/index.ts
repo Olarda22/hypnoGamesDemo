@@ -8,6 +8,7 @@ import character from "./character.svg";
 export const card = {
     name: 'dreamDrop',
     gameName: 'Dream drop',
+    gameUrl: 'https://fake-casino.hypno-game.com/play-demo?game=dream-drop-clinko',
     background,
     previewBg: background,
     character,

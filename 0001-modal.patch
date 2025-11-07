@@ -1,0 +1,473 @@
+From e50aa2dc3b7c46db6db76fe01c0f1cb1295d1377 Mon Sep 17 00:00:00 2001
+From: "H.Devel" <hdevel@ya.ru>
+Date: Fri, 7 Nov 2025 22:10:05 +0300
+Subject: [PATCH] modal
+
+---
+ src/App.tsx                                  |   2 +
+ src/components/GameModal/GameModal.styles.ts | 102 +++++++++++++++++++
+ src/components/GameModal/GameModal.tsx       |  92 +++++++++++++++++
+ src/components/GameModal/index.ts            |   1 +
+ src/components/Icon.tsx                      |  14 ++-
+ src/pages/GamePage.tsx                       |  23 ++++-
+ src/pages/GamePlayPage.styles.ts             |  62 +++++++++++
+ src/pages/GamePlayPage.tsx                   |  52 ++++++++++
+ 8 files changed, 344 insertions(+), 4 deletions(-)
+ create mode 100644 src/components/GameModal/GameModal.styles.ts
+ create mode 100644 src/components/GameModal/GameModal.tsx
+ create mode 100644 src/components/GameModal/index.ts
+ create mode 100644 src/pages/GamePlayPage.styles.ts
+ create mode 100644 src/pages/GamePlayPage.tsx
+
+diff --git a/src/App.tsx b/src/App.tsx
+index d998ad0..bef86ce 100644
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -3,6 +3,7 @@ import Layout from './components/Layout';
+ import AboutPage from './pages/AboutPage';
+ import GamesPage from './pages/GamesPage';
+ import GamePage from './pages/GamePage';
++import GamePlayPage from './pages/GamePlayPage';
+ import { ScrollToTop } from './utils/ScrollToTop';
+ 
+ function App() {
+@@ -15,6 +16,7 @@ function App() {
+           <Route path="/games" element={<GamesPage />} />
+           <Route path="games/:name" element={<GamePage />} />
+         </Route>
++        <Route path="/game-play" element={<GamePlayPage />} />
+       </Routes>
+     </>
+   );
+diff --git a/src/components/GameModal/GameModal.styles.ts b/src/components/GameModal/GameModal.styles.ts
+new file mode 100644
+index 0000000..563f352
+--- /dev/null
++++ b/src/components/GameModal/GameModal.styles.ts
+@@ -0,0 +1,102 @@
++import styled, { keyframes } from 'styled-components';
++
++const fadeIn = keyframes`
++  from {
++    opacity: 0;
++  }
++  to {
++    opacity: 1;
++  }
++`;
++
++const slideIn = keyframes`
++  from {
++    transform: scale(0.9);
++    opacity: 0;
++  }
++  to {
++    transform: scale(1);
++    opacity: 1;
++  }
++`;
++
++export const ModalOverlay = styled.div`
++  position: fixed;
++  top: 0;
++  left: 0;
++  right: 0;
++  bottom: 0;
++  background-color: rgba(255, 255, 255, 0.8);
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  z-index: 9999;
++  padding: 20px;
++  animation: ${fadeIn} 0.3s ease-out;
++
++  @media (max-width: 767px) {
++    padding: 10px;
++  }
++`;
++
++export const ModalContent = styled.div`
++  position: relative;
++  width: 90%;
++  max-width: 1400px;
++  height: 80vh;
++  background: #ffffff;
++  border-radius: 16px;
++  display: flex;
++  flex-direction: column;
++  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
++  animation: ${slideIn} 0.3s ease-out;
++
++  @media (max-width: 767px) {
++    width: 95%;
++    height: 90vh;
++    border-radius: 12px;
++  }
++`;
++
++export const CloseButton = styled.button`
++position: absolute;
++  top: -50px;
++  right: -50px;
++
++  background: transparent;
++  border: none;
++  color: #ffffff;
++  font-size: 32px;
++  line-height: 1;
++  cursor: pointer;
++  padding: 8px;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  transition: all 0.2s ease;
++  border-radius: 8px;
++  width: 40px;
++  height: 40px;
++
++  &:active {
++    transform: rotate(90deg) scale(0.95);
++  }
++
++  @media (max-width: 767px) {
++    font-size: 28px;
++    width: 36px;
++    height: 36px;
++  }
++`;
++
++export const GameIframe = styled.iframe`
++  flex: 1;
++  width: 100%;
++  border: none;
++  border-radius: 16px;
++  background: #ffffff;
++
++  @media (max-width: 767px) {
++    border-radius: 12px;
++  }
++`;
+\ No newline at end of file
+diff --git a/src/components/GameModal/GameModal.tsx b/src/components/GameModal/GameModal.tsx
+new file mode 100644
+index 0000000..157e078
+--- /dev/null
++++ b/src/components/GameModal/GameModal.tsx
+@@ -0,0 +1,92 @@
++import { useEffect } from "react";
++import type { FC } from "react";
++import {
++  ModalOverlay,
++  ModalContent,
++  CloseButton,
++  GameIframe,
++} from "./GameModal.styles";
++import {CloseIcon} from "../Icon";
++
++interface GameModalProps {
++  isOpen: boolean;
++  onClose: () => void;
++  gameUrl: string;
++  gameName: string;
++}
++
++export const GameModal: FC<GameModalProps> = ({
++  isOpen,
++  onClose,
++  gameUrl,
++  gameName,
++}) => {
++  // Обработка клавиши Escape
++  useEffect(() => {
++    const handleEscape = (event: KeyboardEvent) => {
++      if (event.key === "Escape") {
++        onClose();
++      }
++    };
++
++    if (isOpen) {
++      document.addEventListener("keydown", handleEscape);
++    }
++
++    return () => {
++      document.removeEventListener("keydown", handleEscape);
++    };
++  }, [isOpen, onClose]);
++
++  // Блокировка прокрутки body
++  useEffect(() => {
++    if (isOpen) {
++      // Сохраняем текущую позицию прокрутки
++      const scrollY = window.scrollY;
++      document.body.style.position = "fixed";
++      document.body.style.top = `-${scrollY}px`;
++      document.body.style.width = "100%";
++      document.body.style.overflow = "hidden";
++
++      return () => {
++        // Восстанавливаем прокрутку
++        document.body.style.position = "";
++        document.body.style.top = "";
++        document.body.style.width = "";
++        document.body.style.overflow = "";
++        window.scrollTo(0, scrollY);
++      };
++    }
++  }, [isOpen]);
++
++  // Обработка клика по backdrop
++  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
++    if (event.target === event.currentTarget) {
++      onClose();
++    }
++  };
++
++  if (!isOpen) {
++    return null;
++  }
++
++  return (
++    <ModalOverlay onClick={handleOverlayClick}>
++      <ModalContent>
++        <CloseButton
++          onClick={onClose}
++          aria-label="Закрыть модальное окно"
++          type="button"
++        >
++          <CloseIcon />
++        </CloseButton>
++        <GameIframe
++          src={gameUrl}
++          title={gameName}
++          allow="autoplay; fullscreen"
++          allowFullScreen
++        />
++      </ModalContent>
++    </ModalOverlay>
++  );
++};
+diff --git a/src/components/GameModal/index.ts b/src/components/GameModal/index.ts
+new file mode 100644
+index 0000000..90e283f
+--- /dev/null
++++ b/src/components/GameModal/index.ts
+@@ -0,0 +1 @@
++export { GameModal } from './GameModal';
+\ No newline at end of file
+diff --git a/src/components/Icon.tsx b/src/components/Icon.tsx
+index 76496a6..57a0c71 100644
+--- a/src/components/Icon.tsx
++++ b/src/components/Icon.tsx
+@@ -61,7 +61,7 @@ const IconWrapper = styled.div`
+   }
+ 
+   &:hover svg path {
+-    fill: #e63946; /* 👈 новый цвет при hover */
++    fill: #F0554D; /* 👈 новый цвет при hover */
+   }
+ `;
+ 
+@@ -87,6 +87,16 @@ export const CarouseRightButtonIcon: React.FC<IconProps> = () => {
+   );
+ };
+ 
+-
++export const CloseIcon: React.FC<IconProps> = () => {
++  return (
++    <IconWrapper>
++      <svg width="67" height="60" viewBox="0 0 67 60" fill="none" xmlns="http://www.w3.org/2000/svg">
++        <path fill-rule="evenodd" clip-rule="evenodd" d="M45.4761 59.9609C48.4741 59.9609 51.2223 58.3608 52.7214 55.7548L65.0769 34.1981C66.5987 31.5692 66.5987 28.3917 65.0769 25.7629L52.7214 4.2062C51.2223 1.60019 48.4741 1.61049e-05 45.4761 1.55807e-05L20.7422 1.12561e-05C17.7441 1.07319e-05 14.9959 1.60019 13.4969 4.20619L1.14131 25.7629C-0.380429 28.3917 -0.380429 31.5692 1.14131 34.1981L13.4969 55.7548C14.9959 58.3608 17.7441 59.9609 20.7422 59.9609L45.4761 59.9609ZM41.0471 49.2169C42.9777 49.2169 44.7266 48.1882 45.7032 46.5195L53.6299 32.6894C54.5838 30.9977 54.5838 28.9632 53.6299 27.2716L45.7032 13.4415C44.7266 11.7727 42.9777 10.7441 41.0471 10.7441L25.1711 10.7441C23.2406 10.7441 21.4917 11.7727 20.5151 13.4415L12.5884 27.2716C11.6345 28.9632 11.6345 30.9977 12.5884 32.6893L20.5151 46.5195C21.4917 48.1882 23.2406 49.2169 25.1711 49.2169L41.0471 49.2169Z" fill="#3A012D"/>
++        <path d="M39.9736 20.3831C40.9994 19.4222 42.6025 19.4485 43.5964 20.4423C44.6373 21.4832 44.6095 23.1793 43.5351 24.1856L26.5261 40.1168C25.5003 41.0776 23.8972 41.0514 22.9034 40.0575C21.8624 39.0166 21.8902 37.3206 22.9646 36.3143L39.9736 20.3831Z" fill="#3A012D"/>
++        <path d="M23.383 23.5263C22.4222 22.5005 22.4484 20.8974 23.4422 19.9036C24.4832 18.8626 26.1792 18.8904 27.1855 19.9648L43.1167 36.9738C44.0775 37.9996 44.0513 39.6027 43.0574 40.5965C42.0165 41.6375 40.3205 41.6097 39.3142 40.5353L23.383 23.5263Z" fill="#3A012D"/>
++      </svg>
++    </IconWrapper>
++  )
++}
+ 
+ 
+diff --git a/src/pages/GamePage.tsx b/src/pages/GamePage.tsx
+index 5dd0f76..2bb0bae 100644
+--- a/src/pages/GamePage.tsx
++++ b/src/pages/GamePage.tsx
+@@ -11,12 +11,14 @@ import { useEffect, useState } from 'react';
+ import { AboutGame } from '../components/AboutGame/AboutGame';
+ import Games from '../components/Games/Games';
+ import { Button } from '../components/Button/Button';
++import { GameModal } from '../components/GameModal';
+ 
+ 
+ export default function GamePage() {
+   const { isMobile } = useScreenSize();
+   const navigate = useNavigate();
+   const [currentGame, setCurrentGame] = useState<Game | null>(null)
++  const [isModalOpen, setIsModalOpen] = useState(false)
+ 
+   const params = useParams<{ name: keyof typeof cards }>();
+ 
+@@ -31,9 +33,20 @@ export default function GamePage() {
+   //     navigate(`/games/${card.name}`)
+   // };
+   const playNowHandler = (game: Game) => {
+-    console.log('playNowHandler');
+-    //navigate(`/games/${card.name}`)
++    if (isMobile) {
++      navigate('/game-play', {
++        state: {
++          gameUrl: game.gameUrl,
++          gameName: game.gameName
++        }
++      });
++    } else {
++      setIsModalOpen(true);
++    }
++  };
+ 
++  const closeModal = () => {
++    setIsModalOpen(false);
+   };
+   const moreGamesHandler = () => {
+     navigate(`/games`)
+@@ -57,6 +70,12 @@ export default function GamePage() {
+         </Button>
+       </ButtonWrapper>
+ 
++      <GameModal
++        isOpen={isModalOpen}
++        onClose={closeModal}
++        gameUrl={currentGame?.gameUrl || ''}
++        gameName={currentGame?.gameName || ''}
++      />
+     </>
+   );
+ }
+diff --git a/src/pages/GamePlayPage.styles.ts b/src/pages/GamePlayPage.styles.ts
+new file mode 100644
+index 0000000..0a394b8
+--- /dev/null
++++ b/src/pages/GamePlayPage.styles.ts
+@@ -0,0 +1,62 @@
++import styled from 'styled-components';
++
++export const Container = styled.div`
++  position: fixed;
++  top: 0;
++  left: 0;
++  right: 0;
++  bottom: 0;
++  width: 100vw;
++  height: 100vh;
++  background: #000000;
++  display: flex;
++  flex-direction: column;
++  z-index: 9999;
++  overflow: hidden;
++`;
++
++export const BackButton = styled.button`
++  position: absolute;
++  top: 16px;
++  left: 16px;
++  background: rgba(58, 1, 45, 0.9);
++  border: none;
++  color: #ffffff;
++  font-family: 'Nunito', sans-serif;
++  font-size: 16px;
++  font-weight: 600;
++  padding: 12px 20px;
++  border-radius: 8px;
++  cursor: pointer;
++  display: flex;
++  align-items: center;
++  gap: 8px;
++  z-index: 10000;
++  transition: all 0.2s ease;
++  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
++
++  &:hover {
++    background: rgba(84, 17, 56, 0.95);
++    transform: translateY(-2px);
++    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
++  }
++
++  &:active {
++    transform: translateY(0);
++    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
++  }
++
++  @media (max-width: 767px) {
++    top: 12px;
++    left: 12px;
++    font-size: 14px;
++    padding: 10px 16px;
++  }
++`;
++
++export const GameIframe = styled.iframe`
++  width: 100%;
++  height: 100%;
++  border: none;
++  background: #ffffff;
++`;
+\ No newline at end of file
+diff --git a/src/pages/GamePlayPage.tsx b/src/pages/GamePlayPage.tsx
+new file mode 100644
+index 0000000..c218fa5
+--- /dev/null
++++ b/src/pages/GamePlayPage.tsx
+@@ -0,0 +1,52 @@
++import { useEffect } from 'react';
++import { useLocation, useNavigate } from 'react-router-dom';
++import { Container, BackButton, GameIframe } from './GamePlayPage.styles';
++
++export default function GamePlayPage() {
++  const location = useLocation();
++  const navigate = useNavigate();
++  const { gameUrl, gameName } = location.state || {};
++
++  // Если нет данных игры, перенаправляем на главную
++  useEffect(() => {
++    if (!gameUrl || !gameName) {
++      navigate('/games');
++    }
++  }, [gameUrl, gameName, navigate]);
++
++  // Блокировка прокрутки body при монтировании компонента
++  useEffect(() => {
++    const scrollY = window.scrollY;
++    document.body.style.position = 'fixed';
++    document.body.style.top = `-${scrollY}px`;
++    document.body.style.width = '100%';
++    document.body.style.overflow = 'hidden';
++
++    return () => {
++      // Восстанавливаем прокрутку при размонтировании
++      document.body.style.position = '';
++      document.body.style.top = '';
++      document.body.style.width = '';
++      document.body.style.overflow = '';
++      window.scrollTo(0, scrollY);
++    };
++  }, []);
++
++  if (!gameUrl || !gameName) {
++    return null;
++  }
++
++  return (
++    <Container>
++      <BackButton onClick={() => navigate(-1)}>
++        ← Back
++      </BackButton>
++      <GameIframe 
++        src={gameUrl} 
++        title={gameName}
++        allow="autoplay; fullscreen"
++        allowFullScreen
++      />
++    </Container>
++  );
++}
+\ No newline at end of file
+-- 
+2.39.5 (Apple Git-154)
+
