@@ -1,14 +1,14 @@
 // import background from "./background.svg";
-import background from "./banner.svg";
-import person from "./person.svg";
-import logo from "./logo.svg";
-import screen from "./screens/screen.png";
-import character from "./character.svg";
+import background from "assets/oopsMine/banner.svg";
+import person from "assets/oopsMine/person.svg";
+import logo from "assets/oopsMine/logo.svg";
+import screen from "assets/oopsMine/screens/screen.png";
+import character from "assets/oopsMine/character.svg";
 
 export const card = {
-    name: 'royalGoodies',
-    gameName: 'Royal Goodies',
-    gameUrl: 'https://fake-casino.hypno-game.com/play-demo?game=royal-goodies',
+    name: "oopsMine",
+    gameName: 'Oops Mine',
+    gameUrl: 'https://fake-casino.hypno-game.com/play-demo?game=oops-mine',
     background,
     previewBg: background,
     character,
@@ -32,16 +32,16 @@ export const card = {
     gameScreens: [screen, screen, screen, screen, screen, screen],
     gameScreensFull: [screen, screen, screen, screen, screen, screen],
     person,
-    personWidth: "495px",
+    personWidth: "463px",
     personHeight: "570px",
-    personLeft: '598px',
-    personTop: '-32px',
+    personLeft: '555px',
+    personTop: '-50px',
     logo,
-    logoWidth: "287px",
-    logoHeight: "225px",
-    logoLeft: '964px',
-    logoTop: '185px',
-    title: 'THE SWEET\nLIFE STARTS\nWITH THE SPIN!',
-    mobile_title: 'THE SWEET LIFE STARTS WITH THE SPIN!',
-    description: 'We have developed a series of games with a single concept, united by a common setting. This game also features A\nunique mathematical model, Original game mechanics,\nComplex rules, Increased volatility',
+    logoWidth: "277px",
+    logoHeight: "306px",
+    logoLeft: '977px',
+    logoTop: '137px',
+    title: 'A Bad Digger,\nA Great Find',
+    mobile_title: 'A Bad Digger, A Great Find',
+    description: 'The game is inspired by the popular hit Chicken Road, which has proven its appeal to a wide audience. We\'ve adapted the game\'s successful mechanics, reimagining them in our\nstudio\'s unique style.',
 };

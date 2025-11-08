@@ -1,9 +1,9 @@
 // import background from "./background.svg";
-import background from "./banner.svg";
-import person from "./person.svg";
-import logo from "./logo.svg";
-import screen from "./screens/screen.png";
-import character from "./character.svg";
+import background from "assets/dreamDrop/banner.svg";
+import person from "assets/dreamDrop/person.svg";
+import logo from "assets/dreamDrop/logo.svg";
+import screen from "assets/dreamDrop/screens/screen.png";
+import character from "assets/dreamDrop/character.svg";
 
 export const card = {
     name: 'dreamDrop',

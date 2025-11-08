@@ -1,9 +1,8 @@
-// import background from "./background.svg";
-import background from "./banner.png";
-import person from "./person.png";
-import logo from "./logo.png";
-import screen from "./screens/screen.png";
-import character from "./character.svg";
+import background from "assets/nemo/banner.png";
+import person from "assets/nemo/person.png";
+import logo from "assets/nemo/logo.png";
+import screen from "assets/nemo/screens/screen.png";
+import character from "assets/nemo/character.svg";
 
 export const card = {
     name: "nemo",

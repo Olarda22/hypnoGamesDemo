@@ -1,14 +1,14 @@
 // import background from "./background.svg";
-import background from "./banner.svg";
-import person from "./person.svg";
-import logo from "./logo.svg";
-import screen from "./screens/screen.png";
-import character from "./character.svg";
+import background from "assets/royalGoodies/banner.svg";
+import person from "assets/royalGoodies/person.svg";
+import logo from "assets/royalGoodies/logo.svg";
+import screen from "assets/royalGoodies/screens/screen.png";
+import character from "assets/royalGoodies/character.svg";
 
 export const card = {
-    name: "senorFoodTruck",
-    gameName: 'Senor FoodTruck',
-    gameUrl: 'https://fake-casino.hypno-game.com/play-demo?game=food-truck',
+    name: 'royalGoodies',
+    gameName: 'Royal Goodies',
+    gameUrl: 'https://fake-casino.hypno-game.com/play-demo?game=royal-goodies',
     background,
     previewBg: background,
     character,
@@ -32,16 +32,16 @@ export const card = {
     gameScreens: [screen, screen, screen, screen, screen, screen],
     gameScreensFull: [screen, screen, screen, screen, screen, screen],
     person,
-    personWidth: "518px",
-    personHeight: "567px",
-    personLeft: '550px',
-    personTop: '-48px',
+    personWidth: "495px",
+    personHeight: "570px",
+    personLeft: '598px',
+    personTop: '-32px',
     logo,
-    logoWidth: "257px",
-    logoHeight: "309px",
-    logoLeft: '966px',
-    logoTop: '98px',
-    title: 'ROLL ON\nTHE WHOLE\nCUTLET!',
-    mobile_title: 'ROLL ON THE WHOLE CUTLET',
-    description: 'The Food Truck game features Cascading Reels mechanics: when a winning combination is formed, symbols disappear,\nand the empty cells are filled with new elements from\nabove.',
+    logoWidth: "287px",
+    logoHeight: "225px",
+    logoLeft: '964px',
+    logoTop: '185px',
+    title: 'THE SWEET\nLIFE STARTS\nWITH THE SPIN!',
+    mobile_title: 'THE SWEET LIFE STARTS WITH THE SPIN!',
+    description: 'We have developed a series of games with a single concept, united by a common setting. This game also features A\nunique mathematical model, Original game mechanics,\nComplex rules, Increased volatility',
 };

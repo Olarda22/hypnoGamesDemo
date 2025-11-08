@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import { Navigation, Autoplay, Pagination } from 'swiper/modules';
 import { CarouseLeftButtonIcon, CarouseRightButtonIcon } from "../Icon";
-import type { Game } from '../BannerCard/assets';
+import type { Game } from '../../data';
 import { useMemo } from 'react';
 import { Image, NavButton, SwiperContainer, Container } from './ScreensSwiper.styles';
 import { useScreenSize } from '../../utils/useScreenSize';

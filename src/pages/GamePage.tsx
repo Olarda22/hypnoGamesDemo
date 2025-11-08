@@ -3,7 +3,7 @@ import { useScreenSize } from '../utils/useScreenSize';
 import { BannerCard, cards } from '../components/BannerCard';
 import { BannerCardSmall } from '../components/BannerCard/BannerCardSmall';
 import { Banner, BannerWrapper, ButtonWrapper, ViewerWrapper } from './GamePage.styles';
-import type { Game } from '../components/BannerCard/assets';
+import type { Game } from '../data/assets';
 import ScreensSwiper from '../components/ScreensSwiper/ScreensSwiper';
 import { useCallback, useEffect, useState } from 'react';
 import { AboutGame } from '../components/AboutGame/AboutGame';

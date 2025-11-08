@@ -1,9 +1,9 @@
 // import background from "./background.svg";
-import background from "./banner.svg";
-import person from "./person.png";
-import logo from "./logo.png";
-import screen from "./screens/screen.png";
-import character from "./character.svg";
+import background from "assets/coyote/banner.svg";
+import person from "assets/coyote/person.png";
+import logo from "assets/coyote/logo.png";  
+import screen from "assets/coyote/screens/screen.png";
+import character from "assets/coyote/character.svg";
 
 export const card = {
     name: 'coyote',

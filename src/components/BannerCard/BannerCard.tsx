@@ -1,9 +1,8 @@
 import React from "react";
 import { Container, Layer, Title, Description, TitleWrapper, ButtonWrapper } from "./BannerCard.styles";
 
-import { cards, type Game } from "./assets";
+import { cards, type Game } from "../../data";
 import { Button } from "../Button/Button";
-
 
 export interface BannerCardProps {
   card: Game; 

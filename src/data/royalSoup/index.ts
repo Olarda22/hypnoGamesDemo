@@ -1,14 +1,14 @@
 // import background from "./background.svg";
-import background from "./banner.svg";
-import person from "./person.svg";
-import logo from "./logo.svg";
-import screen_1 from "./screens/screen_1.svg";
-import screen_2 from "./screens/screen_2.svg"
-import screen_3 from "./screens/screen_3.svg";
-import screen_4 from "./screens/screen_4.svg";
-import screen_5 from "./screens/screen_5.svg";
-import screen_6 from "./screens/screen_6.svg";
-import character from "./character.svg";
+import background from "assets/royalSoup/banner.svg";
+import person from "assets/royalSoup/person.svg";
+import logo from "assets/royalSoup/logo.svg";
+import screen_1 from "assets/royalSoup/screens/screen_1.svg";
+import screen_2 from "assets/royalSoup/screens/screen_2.svg"
+import screen_3 from "assets/royalSoup/screens/screen_3.svg";
+import screen_4 from "assets/royalSoup/screens/screen_4.svg";
+import screen_5 from "assets/royalSoup/screens/screen_5.svg";
+import screen_6 from "assets/royalSoup/screens/screen_6.svg";
+import character from "assets/royalSoup/character.svg";
 
 export const card = {
     name: "royalSoup",

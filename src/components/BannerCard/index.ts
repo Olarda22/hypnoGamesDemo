@@ -1,2 +1,2 @@
 export { BannerCard } from './BannerCard';
-export { cards } from './assets';
+export { cards } from '../../data/index';

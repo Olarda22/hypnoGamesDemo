@@ -1,13 +1,14 @@
 // import background from "./background.svg";
-import background from "./banner.svg";
-import person from "./person.svg";
-import logo from "./logo.svg";
-import screen from "./screens/screen.png";
-import character from "./character.svg";
+import background from "assets/senorFoodTruck/banner.svg";
+import person from "assets/senorFoodTruck/person.svg";
+import logo from "assets/senorFoodTruck/logo.svg";
+import screen from "assets/senorFoodTruck/screens/screen.png";
+import character from "assets/senorFoodTruck/character.svg";
+
 export const card = {
-    name: "oopsMine",
-    gameName: 'Oops Mine',
-    gameUrl: 'https://fake-casino.hypno-game.com/play-demo?game=oops-mine',
+    name: "senorFoodTruck",
+    gameName: 'Senor FoodTruck',
+    gameUrl: 'https://fake-casino.hypno-game.com/play-demo?game=food-truck',
     background,
     previewBg: background,
     character,
@@ -31,16 +32,16 @@ export const card = {
     gameScreens: [screen, screen, screen, screen, screen, screen],
     gameScreensFull: [screen, screen, screen, screen, screen, screen],
     person,
-    personWidth: "463px",
-    personHeight: "570px",
-    personLeft: '555px',
-    personTop: '-50px',
+    personWidth: "518px",
+    personHeight: "567px",
+    personLeft: '550px',
+    personTop: '-48px',
     logo,
-    logoWidth: "277px",
-    logoHeight: "306px",
-    logoLeft: '977px',
-    logoTop: '137px',
-    title: 'A Bad Digger,\nA Great Find',
-    mobile_title: 'A Bad Digger, A Great Find',
-    description: 'The game is inspired by the popular hit Chicken Road, which has proven its appeal to a wide audience. We\'ve adapted the game\'s successful mechanics, reimagining them in our\nstudio\'s unique style.',
+    logoWidth: "257px",
+    logoHeight: "309px",
+    logoLeft: '966px',
+    logoTop: '98px',
+    title: 'ROLL ON\nTHE WHOLE\nCUTLET!',
+    mobile_title: 'ROLL ON THE WHOLE CUTLET',
+    description: 'The Food Truck game features Cascading Reels mechanics: when a winning combination is formed, symbols disappear,\nand the empty cells are filled with new elements from\nabove.',
 };

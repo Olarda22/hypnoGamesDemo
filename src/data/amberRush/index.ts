@@ -1,8 +1,8 @@
-import background from "./banner.svg";
-import person from "./person.svg";
-import logo from "./logo.svg";
-import screen from "./screens/screen.png";
-import character from "./character.svg";
+import background from "assets/amberRush/banner.svg"; 
+import person from "assets/amberRush/person.svg";
+import logo from "assets/amberRush/logo.svg";
+import screen from "assets/amberRush/screens/screen.png";
+import character from "assets/amberRush/character.svg";
 
 export const card = {
     name: 'amberRush',
